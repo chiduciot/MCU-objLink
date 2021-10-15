@@ -1,13 +1,13 @@
-Để truyền dữ liệu giữa các vi điều khiển, chúng ta thường dùng các giao tiếp như SPI, I2C, UART, 1-Wire, v.v..
+    Để truyền dữ liệu giữa các vi điều khiển, chúng ta thường dùng các giao tiếp như SPI, I2C, UART, 1-Wire, v.v..
 
-Nhưng hầu hết chúng ta đều chỉ sử dụng để truyền dữ liệu dạng thô (raw) và không kiểm tra lỗi truyền nhận. Và trong các giao tiếp truyền dữ liệu, UART là giao tiếp thông dụng và đơn giản nhất mà hầu hết các vi điều khiển đều có phần cứng UART.
+    Nhưng hầu hết chúng ta đều chỉ sử dụng để truyền dữ liệu dạng thô (raw) và không kiểm tra lỗi truyền nhận. Và trong các giao tiếp truyền dữ liệu, UART là giao tiếp thông dụng và đơn giản nhất mà hầu hết các vi điều khiển đều có phần cứng UART.
 
-Trong trường hợp vi điều khiển không có phần cứng UART, thì softUART cũng rất đơn giản. Và giao tiếp UART với máy tính hay các thiết bị ngoại vi khác cũng yêu cầu phần cứng đơn giản và có sẵn. UART có một nhược điểm là có tỉ lệ sai sót khi truyền nhận, tỉ lệ này phụ thuộc vào tốc độ truyền nhận tương ứng với tốc độ xung nhịp của vi xử lý.
+    T  rong trường hợp vi điều khiển không có phần cứng UART, thì softUART cũng rất đơn giản. Và giao tiếp UART với máy tính hay các thiết bị ngoại vi khác cũng yêu cầu phần cứng đơn giản và có sẵn. UART có một nhược điểm là có tỉ lệ sai sót khi truyền nhận, tỉ lệ này phụ thuộc vào tốc độ truyền nhận tương ứng với tốc độ xung nhịp của vi xử lý.
 Trong hầu hết các trường hợp thì dữ liệu truyền đi là chính xác.
 
-Nhưng có nhiều ứng dụng quan trọng, yêu cầu dữ liệu truyền đi phải chính xác tuyệt đối đó là lý do các thiết bị điều khiển công nghiệp thường truyền với tốc độ rất thấp 9600 baud, 19200 baud (PLC, máy CNC). Và thậm chí còn có thêm các tính toán để kiểm tra lỗi, mà thông dụng nhất là tính tổng (Check Sum), tính chẵn lẻ (Parity), CRC (Cyclic Redundancy Check - cái này tôi không dịch ra tiếng Việt vì nó là từ chuyên ngành, dịch ra rất khó hiểu).
+    Nhưng có nhiều ứng dụng quan trọng, yêu cầu dữ liệu truyền đi phải chính xác tuyệt đối đó là lý do các thiết bị điều khiển công nghiệp thường truyền với tốc độ rất thấp 9600 baud, 19200 baud (PLC, máy CNC). Và thậm chí còn có thêm các tính toán để kiểm tra lỗi, mà thông dụng nhất là tính tổng (Check Sum), tính chẵn lẻ (Parity), CRC (Cyclic Redundancy Check - cái này tôi không dịch ra tiếng Việt vì nó là từ chuyên ngành, dịch ra rất khó hiểu).
 
-Việc gửi nhận dữ liệu qua UART thì quá đơn giản, nhưng vấn đề là chúng ta cần nhận biết dữ liệu là gì, dữ liệu được truyền đi có đúng không .v.v...
+    Việc gửi nhận dữ liệu qua UART thì quá đơn giản, nhưng vấn đề là chúng ta cần nhận biết dữ liệu là gì, dữ liệu được truyền đi có đúng không .v.v...
 Do đó tôi có viết 1 thư viện nhỏ để tự đồng đồng bộ dữ liệu giữa 2 vi điều khiển, dữ liệu truyền nhận được kiểm tra lỗi bằng CRC.
 
 Sử dụng cực kỳ đơn giản :
